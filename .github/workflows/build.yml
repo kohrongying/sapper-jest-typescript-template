@@ -28,16 +28,9 @@ jobs:
           node-version: '12.x'
       - run: npm install
       - run: npm run export
-      - name: Switch branch and commit
-        run: |
-            git checkout docs
-            mv __sapper__/export/* .
-            git config --global user.name 'kohrongying'
-            git config --global user.email 'kohrongying@gmail.com'
-            git add .
-            git commit -m "Build files"    
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
-          branch: docs
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: docs
+          FOLDER: __sapper__/export
