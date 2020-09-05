@@ -27,15 +27,17 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
-      - run: npm run build
-      - name: Commit and push
-        uses: EndBug/add-and-commit@v4
+      - run: npm run export
+      - name: Switch branch and commit
+        run: |
+            git checkout docs
+            mv __sapper__/export/* .
+            git config --global user.name 'kohrongying'
+            git config --global user.email 'kohrongying@gmail.com'
+            git add .
+            git commit -m "Build files"    
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          author_name: kohrongying
-          author_email: kohrongying@gmail.com
-          message: 'Build files'
-          ref: 'docs'
-          add: '__sapper__'
-          force: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}
