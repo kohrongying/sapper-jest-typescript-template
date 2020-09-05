@@ -1,5 +1,5 @@
-<script>
-	export let segment;
+<script lang="ts">
+	export let segment: any;
 </script>
 
 <style>

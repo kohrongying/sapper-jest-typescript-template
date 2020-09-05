@@ -7,6 +7,10 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
+// typescript support
+import sveltePreprocess from 'svelte-preprocess';
+import typescript from '@rollup/plugin-typescript';
+
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
@@ -21,15 +25,18 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
-				dev,
+        dev,
+        preprocess: sveltePreprocess(),
 				hydratable: true,
 				emitCss: true
-			}),
+      }),
+      typescript({ sourceMap: dev }),
 			resolve({
 				browser: true,
 				dedupe: ['svelte']
@@ -71,10 +78,12 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
-				generate: 'ssr',
+        generate: 'ssr',
+        preprocess: sveltePreprocess(),
 				hydratable: true,
 				dev
-			}),
+      }),
+      typescript({ sourceMap: dev }),
 			resolve({
 				dedupe: ['svelte']
 			}),
