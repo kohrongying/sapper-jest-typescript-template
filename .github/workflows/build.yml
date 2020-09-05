@@ -33,4 +33,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: docs
-          FOLDER: __sapper__/export
+          FOLDER: __sapper__/export/sapper-jest-typescript-template
