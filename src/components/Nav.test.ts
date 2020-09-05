@@ -5,7 +5,7 @@ test("renders navbar links", () => {
   const { getByText } = render(Nav);
   const blogElement = getByText(/blog/i);
   const homeElement = getByText(/home/i);
-  const aboutElement = getByText(/about/i);
+  const aboutElement = getByText(/rongying/i);
 
   expect(blogElement).toBeInTheDocument();
   expect(homeElement).toBeInTheDocument();
