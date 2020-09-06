@@ -7,7 +7,7 @@ module.exports = {
         "preprocess": true
       }
     ],
-    "^.+\\.test.ts$": "ts-jest"
+    "^.+\\.ts$": "ts-jest"
   },
   moduleFileExtensions: ["js", "svelte", "ts"],
   testPathIgnorePatterns: ["node_modules", "cypress"],
